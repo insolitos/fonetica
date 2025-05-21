@@ -1,0 +1,826 @@
+{
+  "appInfo": {
+    "nome": "FonéticaPT",
+    "versao": "1.0.0",
+    "descricao": "Aplicação para estudo dos fenómenos fonéticos do Português Europeu",
+    "autor": "Desenvolvido como recurso educativo",
+    "ano": 2025,
+    "licenca": "MIT"
+  },
+  "fenomenos": [
+    {
+      "id": "elisao",
+      "nome": "Elisão",
+      "descricaoBreve": "Supressão de vogal átona final quando a palavra seguinte começa por vogal",
+      "descricao": "A elisão é um fenómeno fonético que consiste na supressão de uma vogal átona final quando a palavra seguinte começa por vogal. É um fenómeno muito comum no português europeu e contribui para o ritmo característico da pronúncia portuguesa.",
+      "explicacao": "Na fala corrente do português europeu, quando uma palavra termina em vogal átona (geralmente 'e') e a palavra seguinte começa por vogal, a vogal final da primeira palavra tende a desaparecer, criando uma ligação entre as duas palavras na pronúncia.",
+      "usosComuns": "Muito frequente na fala quotidiana, especialmente com preposições como 'de', 'sobre' e demonstrativos.",
+      "exemplos": [
+        {
+          "antes": "de acordo",
+          "depois": "d'acordo",
+          "explicacao": "A vogal 'e' da preposição 'de' é eliminada porque a palavra seguinte ('acordo') começa com a vogal 'a'."
+        },
+        {
+          "antes": "este assunto",
+          "depois": "est'assunto",
+          "explicacao": "O 'e' final de 'este' desaparece na pronúncia porque 'assunto' começa com a vogal 'a'."
+        },
+        {
+          "antes": "noite escura",
+          "depois": "noit'escura",
+          "explicacao": "O 'e' final de 'noite' é eliminado pois a palavra seguinte 'escura' começa com a vogal 'e'."
+        },
+        {
+          "antes": "desde ontem",
+          "depois": "desd'ontem",
+          "explicacao": "O 'e' final de 'desde' é suprimido porque 'ontem' começa com a vogal 'o'."
+        }
+      ],
+      "regras": [
+        "Ocorre principalmente com vogais átonas finais (e, a, o)",
+        "A palavra seguinte deve começar por vogal",
+        "É mais comum na fala natural do que na formal ou lenta",
+        "Na escrita standard, mantêm-se as vogais, mas em representações da fala coloquial pode usar-se o apóstrofo"
+      ],
+      "exercicios": [
+        {
+          "pergunta": "Em qual das seguintes frases ocorre o fenómeno da elisão na pronúncia?",
+          "opcoes": [
+            "A casa branca",
+            "O livro antigo",
+            "Um pássaro azul",
+            "Dois cães pretos"
+          ],
+          "respostaCorreta": 1,
+          "feedbackPositivo": "Correto! Em 'O livro antigo', o 'o' final de 'livro' e o 'a' inicial de 'antigo' encontram-se, causando a elisão na pronúncia natural: 'livr'antigo'.",
+          "feedbackNegativo": "Não é correto. Nas outras opções não ocorre elisão porque ou as palavras não terminam em vogal átona, ou a palavra seguinte não começa por vogal, ou ambos."
+        },
+        {
+          "pergunta": "Como se pronunciaria corretamente a expressão 'de acordo com' no português europeu falado?",
+          "opcoes": [
+            "de-a-cor-do-com",
+            "de a-cor-do com",
+            "d'a-cor-do-com",
+            "de-a-cor-do com"
+          ],
+          "respostaCorreta": 2,
+          "feedbackPositivo": "Exatamente! Na pronúncia natural do português europeu, ocorre elisão entre 'de' e 'acordo', resultando em 'd'acordo com'.",
+          "feedbackNegativo": "Essa não é a pronúncia típica. No português europeu, a vogal 'e' em 'de' é eliminada porque a palavra seguinte ('acordo') começa com vogal, resultando em 'd'acordo com'."
+        },
+        {
+          "pergunta": "Qual é a transcrição mais próxima da pronúncia real de 'Precisamos de ajuda' no português europeu?",
+          "opcoes": [
+            "Pre-ci-sa-mos de a-ju-da",
+            "Pre-ci-sa-mos-de a-ju-da",
+            "Pre-ci-sa-mos d'a-ju-da", 
+            "Pre-ci-sa-mos de-a-ju-da"
+          ],
+          "respostaCorreta": 2,
+          "feedbackPositivo": "Correto! A preposição 'de' sofre elisão antes de 'ajuda', que começa com vogal, resultando na pronúncia 'precisamos d'ajuda'.",
+          "feedbackNegativo": "Incorreto. No português europeu, quando 'de' é seguido por uma palavra que começa com vogal (como 'ajuda'), ocorre elisão da vogal 'e', resultando em 'd'ajuda'."
+        },
+        {
+          "pergunta": "Identifique a frase onde NÃO ocorre o fenómeno da elisão:",
+          "opcoes": [
+            "Ele disse a todos",
+            "Gosto de ouvir música",
+            "Comemos muito arroz",
+            "Temos quatro livros"
+          ],
+          "respostaCorreta": 3,
+          "feedbackPositivo": "Correto! Em 'Temos quatro livros' não ocorre elisão porque 'quatro' termina com 'o' e 'livros' começa com consoante ('l'), não com vogal.",
+          "feedbackNegativo": "Não está correto. A elisão ocorre quando uma palavra termina em vogal átona e a seguinte começa por vogal. Em 'Temos quatro livros' não há condições para elisão, pois 'livros' começa com consoante."
+        }
+      ]
+    },
+    {
+      "id": "crase",
+      "nome": "Crase",
+      "descricaoBreve": "Fusão de duas vogais iguais em uma só",
+      "descricao": "A crase é um fenómeno fonético que consiste na fusão de duas vogais iguais que se encontram, resultando numa única vogal, geralmente mais prolongada. Não confundir com o acento grave (`) que marca a crase da preposição 'a' com o artigo 'a'.",
+      "explicacao": "Quando duas vogais idênticas se encontram no discurso, seja entre palavras ou dentro de uma mesma palavra (após a queda de uma consoante), elas tendem a fundir-se numa única vogal, frequentemente com maior duração. Este fenómeno é muito comum no português europeu e contribui para o ritmo da língua.",
+      "usosComuns": "Ocorre frequentemente com preposições, especialmente quando 'a' encontra outro 'a', como em 'para a'.",
+      "exemplos": [
+        {
+          "antes": "a alma",
+          "depois": "alma",
+          "explicacao": "O artigo 'a' e o 'a' inicial de 'alma' fundem-se numa única vogal, embora na escrita mantenhamos as duas vogais."
+        },
+        {
+          "antes": "contra a",
+          "depois": "contrà",
+          "explicacao": "O 'a' final de 'contra' e o artigo 'a' fundem-se na pronúncia, formando um único som."
+        },
+        {
+          "antes": "para a escola",
+          "depois": "prà escola",
+          "explicacao": "Além da redução de 'para' para 'pra' (síncope), ocorre a crase entre o 'a' final de 'pra' e o artigo 'a', resultando em 'prà'."
+        },
+        {
+          "antes": "casa amarela",
+          "depois": "casàmarela",
+          "explicacao": "O 'a' final de 'casa' funde-se com o 'a' inicial de 'amarela', resultando num único som 'a' prolongado."
+        }
+      ],
+      "regras": [
+        "As vogais devem ser idênticas",
+        "Na escrita formal, as duas vogais são mantidas",
+        "Na representação da fala coloquial, pode usar-se o acento grave para indicar a crase",
+        "Ocorre tanto entre palavras como dentro de palavras"
+      ],
+      "exercicios": [
+        {
+          "pergunta": "Em qual das seguintes expressões ocorre o fenómeno da crase fonética?",
+          "opcoes": [
+            "casa amarela",
+            "toda a turma",
+            "bela história",
+            "grande evento"
+          ],
+          "respostaCorreta": 1,
+          "feedbackPositivo": "Correto! Em 'toda a turma', o 'a' final de 'toda' e o artigo 'a' fundem-se num único som, resultando numa crase fonética (toda a → todà).",
+          "feedbackNegativo": "Não está correto. A crase fonética ocorre quando duas vogais iguais se fundem num único som, como acontece em 'toda a turma', onde o 'a' final de 'toda' se funde com o artigo 'a'."
+        },
+        {
+          "pergunta": "Identifique a frase onde há crase fonética na pronúncia natural do português europeu:",
+          "opcoes": [
+            "Vou para o mercado",
+            "Ele chegou cedo",
+            "Passa a ponte",
+            "Leva o livro"
+          ],
+          "respostaCorreta": 2,
+          "feedbackPositivo": "Exatamente! Em 'Passa a ponte', o 'a' final do verbo 'passa' funde-se com o artigo 'a', formando uma única vogal na pronúncia (passà ponte).",
+          "feedbackNegativo": "Essa não é a resposta correta. A crase fonética ocorre quando duas vogais iguais se encontram e se fundem, como em 'Passa a ponte', onde o 'a' final de 'passa' funde-se com o artigo 'a'."
+        },
+        {
+          "pergunta": "Como seria a pronúncia natural da expressão 'para aquele' no português europeu?",
+          "contextoPrevio": "Observe a pronúncia na frase: 'Vamos para aquele parque'",
+          "opcoes": [
+            "pa-ra a-que-le",
+            "pa-ra-a-que-le",
+            "pra-que-le",
+            "prà-que-le"
+          ],
+          "respostaCorreta": 3,
+          "feedbackPositivo": "Correto! No português europeu coloquial, 'para' frequentemente reduz-se para 'pra', e depois ocorre crase entre o 'a' final de 'pra' e o 'a' inicial de 'aquele', resultando em 'pràquele'.",
+          "feedbackNegativo": "Não está correto. No português europeu coloquial, a preposição 'para' geralmente reduz-se para 'pra', e depois o 'a' final funde-se com o 'a' inicial de 'aquele', formando 'pràquele'."
+        },
+        {
+          "pergunta": "Qual das seguintes frases contém um exemplo de crase fonética?",
+          "opcoes": [
+            "Ela foi à praia",
+            "Ele vai ao cinema",
+            "Não gosta de escrever",
+            "Anda a estudar"
+          ],
+          "respostaCorreta": 0,
+          "feedbackPositivo": "Correto! Em 'Ela foi à praia', temos a fusão da preposição 'a' com o artigo 'a', resultando na crase marcada pelo acento grave. Este é o exemplo clássico de crase no português.",
+          "feedbackNegativo": "Incorreto. A crase fonética ocorre quando há fusão de duas vogais iguais, como acontece em 'Ela foi à praia', onde a preposição 'a' funde-se com o artigo 'a' da palavra 'praia'."
+        }
+      ]
+    },
+    {
+      "id": "assimilacao",
+      "nome": "Assimilação",
+      "descricaoBreve": "Um som modifica-se para se tornar mais semelhante a outro som próximo",
+      "descricao": "A assimilação é um fenómeno fonético em que um som se modifica e adquire características de outro som que se encontra perto dele. Este fenómeno é muito comum em todas as línguas e é responsável por muitas variações na pronúncia.",
+      "explicacao": "Na assimilação, um fonema adquire traços do fonema vizinho, tornando-se mais semelhante a ele. Este processo facilita a articulação, tornando a pronúncia mais fluida e natural. A assimilação pode ser progressiva (quando um som afeta o som seguinte) ou regressiva (quando um som é afetado pelo som seguinte).",
+      "usosComuns": "Ocorre frequentemente com o 's' antes de consoantes sonoras e com vogais antes de consoantes nasais.",
+      "exemplos": [
+        {
+          "antes": "pense",
+          "depois": "pẽse",
+          "explicacao": "A consoante nasal 'n' transmite a nasalidade para a vogal anterior 'e', que se torna nasalizada."
+        },
+        {
+          "antes": "desde",
+          "depois": "dezde",
+          "explicacao": "A consoante sonora 'd' influencia o 's', que se sonoriza e se pronuncia como 'z'."
+        },
+        {
+          "antes": "mesmo",
+          "depois": "mêzmo",
+          "explicacao": "O 's' entre vogais assimila a sonoridade das vogais e pronuncia-se como 'z'. Além disso, a consoante nasal 'm' nasaliza a vogal 'e'."
+        },
+        {
+          "antes": "rasgar",
+          "depois": "razgar",
+          "explicacao": "O 's' assimila a sonoridade da consoante sonora 'g' que o segue, tornando-se 'z'."
+        }
+      ],
+      "tipos": [
+        {
+          "nome": "Assimilação regressiva",
+          "descricao": "O som é influenciado pelo som que vem depois dele",
+          "exemplo": "cidade → cidadi"
+        },
+        {
+          "nome": "Assimilação progressiva",
+          "descricao": "O som influencia o som que vem depois dele",
+          "exemplo": "os olhos → ozolhos"
+        },
+        {
+          "nome": "Assimilação de nasalidade",
+          "descricao": "Uma vogal adquire nasalidade por influência de uma consoante nasal",
+          "exemplo": "campo → cãpo"
+        },
+        {
+          "nome": "Assimilação de sonoridade",
+          "descricao": "Uma consoante surda torna-se sonora (ou vice-versa) por influência de outra",
+          "exemplo": "desde → dezde"
+        }
+      ],
+      "exercicios": [
+        {
+          "pergunta": "Em qual palavra ocorre assimilação de nasalidade no português europeu?",
+          "opcoes": [
+            "casa",
+            "porta",
+            "antes",
+            "prato"
+          ],
+          "respostaCorreta": 2,
+          "feedbackPositivo": "Correto! Em 'antes', o 'n' transmite a sua nasalidade para a vogal 'a', que se torna nasalizada, resultando em 'ãtes'.",
+          "feedbackNegativo": "Não está correto. A assimilação de nasalidade ocorre quando uma consoante nasal (como 'm' ou 'n') transmite a nasalidade para a vogal vizinha, como acontece em 'antes'."
+        },
+        {
+          "pergunta": "Qual das seguintes palavras apresenta o fenómeno de assimilação de sonoridade?",
+          "opcoes": [
+            "facto",
+            "rasgo",
+            "pasta",
+            "cantar"
+          ],
+          "respostaCorreta": 1,
+          "feedbackPositivo": "Exatamente! Em 'rasgo', o 's' assimila a sonoridade da consoante seguinte 'g' (que é sonora) e pronuncia-se como 'z', resultando em 'razgo'.",
+          "feedbackNegativo": "Incorreto. A assimilação de sonoridade ocorre quando uma consoante surda se torna sonora por influência de um som sonoro vizinho, como acontece em 'rasgo', onde o 's' se pronuncia como 'z'."
+        },
+        {
+          "pergunta": "Como se pronuncia o 's' na palavra 'esbelto' no português europeu?",
+          "opcoes": [
+            "Como 's' em 'sapo'",
+            "Como 'z' em 'casa'",
+            "Como 'ch' em 'chuva'",
+            "É mudo, não se pronuncia"
+          ],
+          "respostaCorreta": 1,
+          "feedbackPositivo": "Correto! Em 'esbelto', o 's' assimila a sonoridade da consoante sonora 'b' que o segue, pronunciando-se como 'z', tal como em 'casa'.",
+          "feedbackNegativo": "Não está correto. Quando o 's' está antes de uma consoante sonora como 'b', 'd', 'g', 'v', 'm', ele assimila essa sonoridade e pronuncia-se como 'z'."
+        },
+        {
+          "pergunta": "Qual tipo de assimilação ocorre em 'banco', onde o 'a' se torna nasalizado?",
+          "opcoes": [
+            "Assimilação progressiva",
+            "Assimilação regressiva",
+            "Assimilação de sonoridade",
+            "Assimilação labial"
+          ],
+          "respostaCorreta": 1,
+          "feedbackPositivo": "Correto! Em 'banco', a vogal 'a' é nasalizada por influência da consoante nasal 'n' que vem depois dela, caracterizando uma assimilação regressiva (o som é influenciado pelo som seguinte).",
+          "feedbackNegativo": "Não está correto. Quando uma vogal é nasalizada por influência de uma consoante nasal que vem depois dela, como em 'banco', temos uma assimilação regressiva."
+        }
+      ]
+    },
+    {
+      "id": "queda",
+      "nome": "Queda (Apócope, Síncope, Aférese)",
+      "descricaoBreve": "Supressão de sons em diferentes posições da palavra",
+      "descricao": "A queda ou supressão de sons é um fenómeno fonético muito comum que pode ocorrer em diferentes posições da palavra. Dependendo da posição onde ocorre, recebe nomes específicos: aférese (início), síncope (meio) e apócope (fim).",
+      "explicacao": "A língua portuguesa falada, especialmente o português europeu, caracteriza-se por uma forte tendência à redução vocálica e à supressão de sons em palavras, especialmente em contextos informais e na fala rápida. Este fenómeno contribui para o ritmo característico do português europeu e para a impressão, para ouvidos não treinados, de que 'os portugueses comem as palavras'.",
+      "usosComuns": "Extremamente comum na fala quotidiana do português europeu, principalmente a apócope e a aférese.",
+      "tipos": [
+        {
+          "nome": "Aférese",
+          "descricao": "Supressão de som no início da palavra",
+          "exemplos": ["estar → tar", "esperar → perar", "agora → gora"]
+        },
+        {
+          "nome": "Síncope",
+          "descricao": "Supressão de som no meio da palavra",
+          "exemplos": ["para → pra", "dígito → dig'to", "pássaro → pass'ro"]
+        },
+        {
+          "nome": "Apócope",
+          "descricao": "Supressão de som no fim da palavra",
+          "exemplos": ["grande → grand", "parte → part", "noite → noit"]
+        }
+      ],
+      "exemplos": [
+        {
+          "antes": "estar",
+          "depois": "tar",
+          "explicacao": "Aférese: queda do 'es' inicial, muito comum no português europeu coloquial."
+        },
+        {
+          "antes": "para",
+          "depois": "pra",
+          "explicacao": "Síncope: queda da vogal átona no meio da palavra (embora neste caso seja mais corretamente entre sílabas)."
+        },
+        {
+          "antes": "grande",
+          "depois": "grand",
+          "explicacao": "Apócope: queda do 'e' final átono, fenómeno extremamente comum no português europeu."
+        },
+        {
+          "antes": "porque é que",
+          "depois": "porqu'é que",
+          "explicacao": "Elisão dentro de uma expressão: o 'e' final de 'porque' é eliminado antes da vogal 'é'."
+        }
+      ],
+      "exercicios": [
+        {
+          "pergunta": "Qual fenómeno fonético ocorre na pronúncia de 'telefone' como 'telefon' no português europeu?",
+          "opcoes": [
+            "Síncope",
+            "Aférese",
+            "Apócope",
+            "Epêntese"
+          ],
+          "respostaCorreta": 2,
+          "feedbackPositivo": "Correto! Apócope é a queda de som no final da palavra. Quando 'telefone' é pronunciado como 'telefon', ocorre a queda do 'e' final, caracterizando uma apócope.",
+          "feedbackNegativo": "Não está correto. Quando um som cai no final da palavra, como o 'e' em 'telefone', temos o fenómeno da apócope."
+        },
+        {
+          "pergunta": "Em qual opção ocorre o fenómeno da síncope?",
+          "opcoes": [
+            "Espera → Pera",
+            "Outro → Otru",
+            "Médico → Médco",
+            "Trabalhar → Trabalha"
+          ],
+          "respostaCorreta": 2,
+          "feedbackPositivo": "Exato! Em 'médico → médco', há a queda da vogal 'i' no meio da palavra, o que caracteriza uma síncope.",
+          "feedbackNegativo": "Incorreto. A síncope é a queda de som no meio da palavra, como acontece em 'médico → médco', onde o 'i' é suprimido."
+        },
+        {
+          "pergunta": "Na fala coloquial do português europeu, como se pronuncia frequentemente a palavra 'estava'?",
+          "opcoes": [
+            "estav",
+            "tava",
+            "estava",
+            "stava"
+          ],
+          "respostaCorreta": 1,
+          "feedbackPositivo": "Correto! Na fala coloquial do português europeu, é muito comum ocorrer aférese na palavra 'estava', com a queda dos sons iniciais 'es', resultando em 'tava'.",
+          "feedbackNegativo": "Essa não é a forma mais comum na fala coloquial portuguesa. A palavra 'estava' frequentemente sofre aférese (queda de sons iniciais), sendo pronunciada como 'tava'."
+        },
+        {
+          "pergunta": "Identifique o fenómeno fonético que ocorre na pronúncia de 'chocolate' como 'chocolat' no português europeu:",
+          "opcoes": [
+            "Prótese",
+            "Epêntese",
+            "Síncope",
+            "Apócope"
+          ],
+          "respostaCorreta": 3,
+          "feedbackPositivo": "Correto! Quando 'chocolate' é pronunciado como 'chocolat', ocorre a queda do 'e' final, o que caracteriza uma apócope.",
+          "feedbackNegativo": "Não está correto. A supressão do 'e' final em 'chocolate', resultando em 'chocolat', é um exemplo de apócope (queda de som no final da palavra)."
+        }
+      ]
+    },
+    {
+      "id": "metafonia",
+      "nome": "Metafonia",
+      "descricaoBreve": "Alteração do timbre de uma vogal por influência de outra",
+      "descricao": "A metafonia é um fenómeno fonético que consiste na alteração do timbre (abertura ou fechamento) de uma vogal tónica por influência de uma vogal final. É um fenómeno particularmente importante na formação do plural de muitas palavras do português.",
+      "explicacao": "Na metafonia, a vogal tónica de uma palavra pode abrir ou fechar o seu timbre devido à influência de outra vogal, geralmente a final. Este fenómeno explica, por exemplo, porque algumas palavras mudam o timbre da vogal tónica quando vão para o plural, como 'ovo' [o fechado] → 'ovos' [o aberto].",
+      "usosComuns": "Particularmente notável na formação de plurais de palavras com 'o' tónico.",
+      "exemplos": [
+        {
+          "antes": "ovo [óvu] (singular)",
+          "depois": "ovos [ɔvuʃ] (plural)",
+          "explicacao": "A vogal tónica 'o' fechada no singular abre-se no plural por influência da terminação '-os'."
+        },
+        {
+          "antes": "porco [pórku] (singular)",
+          "depois": "porcos [pɔrkuʃ] (plural)",
+          "explicacao": "O 'o' tónico fechado do singular abre-se no plural devido à terminação '-os'."
+        },
+        {
+          "antes": "novo [nóvu] (singular)",
+          "depois": "novos [nɔvuʃ] (plural)",
+          "explicacao": "O mesmo fenómeno ocorre aqui: o 'o' tónico fechado do singular abre-se no plural."
+        },
+        {
+          "antes": "almoço [almósu] (singular)",
+          "depois": "almoços [almɔsuʃ] (plural)",
+          "explicacao": "O 'o' tónico fechado no singular abre-se no plural quando seguido por '-os'."
+        }
+      ],
+      "regras": [
+        "Afeta principalmente palavras com 'o' tónico fechado no singular",
+        "A vogal tónica abre-se no plural devido à terminação '-os'",
+        "O fenómeno é regular e previsível em muitas palavras do português europeu",
+        "Nem todas as palavras com 'o' tónico fechado sofrem metafonia no plural"
+      ],
+      "exercicios": [
+        {
+          "pergunta": "Qual par de palavras exemplifica corretamente o fenómeno da metafonia no português europeu?",
+          "opcoes": [
+            "casa → casas",
+            "gato → gatos",
+            "corpo → corpos",
+            "livro → livros"
+          ],
+          "respostaCorreta": 2,
+          "feedbackPositivo": "Correto! No par 'corpo → corpos', o 'o' tónico fechado do singular ('côrpo') abre-se no plural ('córpos'), caracterizando a metafonia.",
+          "feedbackNegativo": "Não está correto. A metafonia ocorre quando a vogal tónica muda de timbre do singular para o plural, como em 'corpo → corpos', onde o 'o' fechado do singular abre-se no plural."
+        },
+        {
+          "pergunta": "Como se pronuncia a vogal tónica no plural da palavra 'jogo' no português europeu?",
+          "opcoes": [
+            "Com 'o' fechado, como em 'avô'",
+            "Com 'o' aberto, como em 'avó'",
+            "Sem alteração em relação ao singular",
+            "Como 'u'"
+          ],
+          "respostaCorreta": 1,
+          "feedbackPositivo": "Exato! No plural 'jogos', a vogal tónica 'o' é pronunciada aberta ('ó', como em 'avó'), enquanto no singular 'jogo' é fechada ('ô', como em 'avô').",
+          "feedbackNegativo": "Incorreto. No português europeu, a vogal tónica 'o' da palavra 'jogo' é fechada no singular, mas abre-se no plural 'jogos', resultando em 'ó' aberto."
+        },
+        {
+          "pergunta": "Qual fenómeno explica a diferença de pronúncia na vogal tónica entre 'forno' e 'fornos'?",
+          "opcoes": [
+            "Assimilação",
+            "Metafonia",
+            "Síncope",
+            "Epêntese"
+          ],
+          "respostaCorreta": 1,
+          "feedbackPositivo": "Correto! A metafonia explica por que o 'o' tónico em 'forno' é fechado, mas em 'fornos' torna-se aberto devido à influência da terminação '-os'.",
+          "feedbackNegativo": "Não está correto. A mudança no timbre da vogal tónica 'o' de fechada em 'forno' para aberta em 'fornos' é um caso típico de metafonia."
+        },
+        {
+          "pergunta": "Qual das seguintes palavras NÃO sofre metafonia na formação do plural?",
+          "opcoes": [
+            "Posto",
+            "Poço",
+            "Bolso",
+            "Povo"
+          ],
+          "respostaCorreta": 3,
+          "feedbackPositivo": "Correto! A palavra 'povo' não sofre metafonia na formação do plural. O 'o' tónico mantém-se fechado tanto em 'povo' quanto em 'povos'.",
+          "feedbackNegativo": "Não está correto. Entre as opções, 'povo' é a única palavra que não sofre metafonia na formação do plural, ou seja, o 'o' tónico mantém-se fechado tanto no singular quanto no plural."
+        }
+      ]
+    },
+    {
+      "id": "epenteseProtese",
+      "nome": "Epêntese e Prótese",
+      "descricaoBreve": "Adição de sons no meio ou no início das palavras",
+      "descricao": "A epêntese e a prótese são fenómenos fonéticos que consistem na adição de sons: a epêntese é a adição no meio da palavra, enquanto a prótese é a adição no início.",
+      "explicacao": "Estes fenómenos ocorrem frequentemente para facilitar a pronúncia, especialmente em grupos consonânticos de difícil articulação. Historicamente, foram importantes na evolução do latim para o português e continuam presentes na fala atual, principalmente em registos coloquiais.",
+      "usosComuns": "Ocorrem frequentemente em empréstimos linguísticos e em palavras com grupos consonânticos complexos.",
+      "tipos": [
+        {
+          "nome": "Epêntese",
+          "descricao": "Adição de som no meio da palavra",
+          "exemplos": ["advogado → adevogado", "pneu → peneu", "ritmo → ritimo"]
+        },
+        {
+          "nome": "Prótese",
+          "descricao": "Adição de som no início da palavra",
+          "exemplos": ["spiritu → espírito", "scuola (italiano) → escola", "stress → estresse"]
+        }
+      ],
+      "exemplos": [
+        {
+          "antes": "pneu",
+          "depois": "peneu",
+          "explicacao": "Epêntese: adição da vogal 'e' entre as consoantes 'p' e 'n' para facilitar a pronúncia em português."
+        },
+        {
+          "antes": "admirar",
+          "depois": "ademirar",
+          "explicacao": "Epêntese: inserção da vogal 'e' entre 'd' e 'm', comum em falantes de algumas regiões."
+        },
+        {
+          "antes": "standby",
+          "depois": "estandby",
+          "explicacao": "Prótese: adição da vogal 'e' no início da palavra, facilitando a pronúncia do grupo consonântico inicial 'st'."
+        },
+        {
+          "antes": "smart (inglês)",
+          "depois": "esmart",
+          "explicacao": "Prótese: adição da vogal 'e' no início da palavra estrangeira, facilitando a pronúncia para falantes de português."
+        }
+      ],
+      "exercicios": [
+        {
+          "pergunta": "Qual fenómeno fonético ocorre na pronúncia de 'psicologia' como 'pisicologia'?",
+          "opcoes": [
+            "Epêntese",
+            "Prótese",
+            "Síncope",
+            "Aférese"
+          ],
+          "respostaCorreta": 0,
+          "feedbackPositivo": "Correto! A inserção da vogal 'i' entre as consoantes 'p' e 's' para facilitar a pronúncia é um caso de epêntese (adição de som no meio da palavra).",
+          "feedbackNegativo": "Não está correto. Quando um som é adicionado no meio da palavra, como o 'i' em 'pisicologia', temos o fenómeno da epêntese."
+        },
+        {
+          "pergunta": "Na pronúncia de 'sprint' como 'esprint', qual fenómeno fonético ocorre?",
+          "opcoes": [
+            "Paragoge",
+            "Síncope",
+            "Epêntese",
+            "Prótese"
+          ],
+          "respostaCorreta": 3,
+          "feedbackPositivo": "Exato! A adição da vogal 'e' no início da palavra 'sprint', resultando em 'esprint', caracteriza o fenómeno da prótese (adição de som no início da palavra).",
+          "feedbackNegativo": "Incorreto. Quando um som é adicionado no início da palavra, como o 'e' em 'esprint', temos o fenómeno da prótese."
+        },
+        {
+          "pergunta": "Qual destas palavras exemplifica o fenómeno da epêntese no português?",
+          "opcoes": [
+            "advogado → adevogado",
+            "escola → cola",
+            "cantar → cantá",
+            "estar → tar"
+          ],
+          "respostaCorreta": 0,
+          "feedbackPositivo": "Correto! Em 'advogado → adevogado', ocorre a inserção da vogal 'e' entre as consoantes 'd' e 'v', caracterizando a epêntese.",
+          "feedbackNegativo": "Essa não é a opção correta. A epêntese ocorre quando se adiciona um som no meio da palavra, como acontece em 'advogado → adevogado', onde se insere um 'e' entre 'd' e 'v'."
+        },
+        {
+          "pergunta": "Identifique a palavra que exemplifica o fenómeno da prótese na evolução do latim para o português:",
+          "opcoes": [
+            "schola → escola",
+            "directum → direito",
+            "nocte → noite",
+            "homine → homem"
+          ],
+          "respostaCorreta": 0,
+          "feedbackPositivo": "Correto! Na evolução de 'schola' (latim) para 'escola' (português), houve a adição da vogal 'e' no início da palavra para facilitar a pronúncia do grupo consonântico inicial 'sch', caracterizando a prótese.",
+          "feedbackNegativo": "Não está correto. A prótese é a adição de som no início da palavra, como ocorreu na evolução de 'schola' (latim) para 'escola' (português), onde se adicionou a vogal 'e' inicial."
+        }
+      ]
+    },
+    {
+      "id": "ditongacaoMonotongacao",
+      "nome": "Ditongação e Monotongação",
+      "descricaoBreve": "Transformação entre vogal e ditongo",
+      "descricao": "A ditongação é a formação de um ditongo a partir de uma vogal, enquanto a monotongação é o processo contrário: a redução de um ditongo a uma vogal simples.",
+      "explicacao": "Estes fenómenos são muito comuns na evolução das línguas e no uso quotidiano. No português, a monotongação é particularmente frequente na fala coloquial, onde ditongos como 'ei' e 'ou' são frequentemente reduzidos a vogais simples ('e' e 'o', respetivamente).",
+      "usosComuns": "A monotongação é extremamente comum na fala coloquial do português europeu e brasileiro.",
+      "tipos": [
+        {
+          "nome": "Ditongação",
+          "descricao": "Transformação de uma vogal em ditongo",
+          "exemplos": ["paz → pais", "vez → veis", "português (pt-BR) → purtuguêis"]
+        },
+        {
+          "nome": "Monotongação",
+          "descricao": "Redução de um ditongo a uma vogal simples",
+          "exemplos": ["caixa → caxa", "peixe → pexe", "couro → coro"]
+        }
+      ],
+      "exemplos": [
+        {
+          "antes": "amei",
+          "depois": "amê",
+          "explicacao": "Monotongação: o ditongo 'ei' é reduzido à vogal 'ê', muito comum no português europeu e brasileiro."
+        },
+        {
+          "antes": "ouro",
+          "depois": "ôro",
+          "explicacao": "Monotongação: o ditongo 'ou' reduz-se à vogal 'ô', fenómeno muito frequente no português contemporâneo."
+        },
+        {
+          "antes": "três",
+          "depois": "trêis",
+          "explicacao": "Ditongação: a vogal 'ê' transforma-se no ditongo 'êi', comum em algumas variedades regionais do português."
+        },
+        {
+          "antes": "mas",
+          "depois": "mais",
+          "explicacao": "Ditongação: a vogal 'a' transforma-se no ditongo 'ai', ocorrendo em algumas variantes regionais."
+        }
+      ],
+      "exercicios": [
+        {
+          "pergunta": "Qual fenómeno fonético ocorre na pronúncia de 'caixa' como 'caxa'?",
+          "opcoes": [
+            "Ditongação",
+            "Monotongação",
+            "Assimilação",
+            "Epêntese"
+          ],
+          "respostaCorreta": 1,
+          "feedbackPositivo": "Correto! A redução do ditongo 'ai' para a vogal simples 'a' em 'caixa → caxa' é um exemplo clássico de monotongação.",
+          "feedbackNegativo": "Não está correto. Quando um ditongo se reduz a uma vogal simples, como em 'caixa → caxa', temos o fenómeno da monotongação."
+        },
+        {
+          "pergunta": "Em qual palavra ocorre a ditongação na fala de algumas regiões?",
+          "opcoes": [
+            "leite → lete",
+            "peixe → pexe",
+            "paz → paiz",
+            "ouro → oro"
+          ],
+          "respostaCorreta": 2,
+          "feedbackPositivo": "Exato! Em algumas variantes regionais do português, a palavra 'paz' pode ser pronunciada como 'paiz', exemplificando o fenómeno da ditongação (transformação de uma vogal em ditongo).",
+          "feedbackNegativo": "Incorreto. A ditongação ocorre quando uma vogal simples se transforma em ditongo, como em 'paz → paiz', comum em algumas variantes regionais."
+        },
+        {
+          "pergunta": "No português europeu coloquial, como é frequentemente pronunciada a palavra 'dinheiro'?",
+          "opcoes": [
+            "dinhêro",
+            "dinheru",
+            "dinhêiru",
+            "dinhêiro"
+          ],
+          "respostaCorreta": 0,
+          "feedbackPositivo": "Correto! No português europeu coloquial, é muito comum a monotongação do ditongo 'ei' para 'ê' em 'dinheiro', resultando em 'dinhêro'.",
+          "feedbackNegativo": "Não está correto. No português europeu coloquial, o ditongo 'ei' em 'dinheiro' frequentemente sofre monotongação, sendo pronunciado como 'ê', resultando em 'dinhêro'."
+        },
+        {
+          "pergunta": "Qual par de palavras demonstra o fenómeno da monotongação na fala quotidiana?",
+          "opcoes": [
+            "trem → treim",
+            "pouco → pôco",
+            "vez → vês",
+            "sol → soil"
+          ],
+          "respostaCorreta": 1,
+          "feedbackPositivo": "Correto! Em 'pouco → pôco', ocorre a monotongação do ditongo 'ou' para a vogal simples 'ô', fenómeno muito comum na fala quotidiana do português.",
+          "feedbackNegativo": "Não está correto. A monotongação é a redução de um ditongo a uma vogal simples, como ocorre em 'pouco → pôco', onde o ditongo 'ou' reduz-se à vogal 'ô'."
+        }
+      ]
+    },
+    {
+      "id": "nasalizacao",
+      "nome": "Nasalização",
+      "descricaoBreve": "Transformação de uma vogal oral em nasal",
+      "descricao": "A nasalização é um fenómeno fonético que consiste na transformação de uma vogal oral em nasal, geralmente por influência de uma consoante nasal adjacente.",
+      "explicacao": "No português, a nasalização pode ocorrer por assimilação (quando uma vogal adquire o traço de nasalidade de uma consoante nasal vizinha) ou pode ser intrínseca à própria palavra. A nasalização é uma característica distintiva do português em comparação com outras línguas românicas.",
+      "usosComuns": "A nasalização é uma característica fundamental da fonética portuguesa, distinguindo-a das outras línguas românicas.",
+      "exemplos": [
+        {
+          "antes": "campo",
+          "depois": "cãpo",
+          "explicacao": "A vogal 'a' adquire nasalidade por influência da consoante nasal 'm' que a segue."
+        },
+        {
+          "antes": "lenda",
+          "depois": "lẽda",
+          "explicacao": "A vogal 'e' nasaliza-se devido à consoante nasal 'n' seguinte."
+        },
+        {
+          "antes": "sim",
+          "depois": "sĩ",
+          "explicacao": "A vogal 'i' é nasalizada pela consoante nasal 'm' que a segue."
+        },
+        {
+          "antes": "um",
+          "depois": "ũ",
+          "explicacao": "A vogal 'u' adquire nasalidade por influência da consoante nasal 'm'."
+        }
+      ],
+      "regras": [
+        "Vogais seguidas de consoantes nasais (m, n) tendem a nasalizar-se",
+        "A nasalização é mais forte quando a consoante nasal está no fim da sílaba",
+        "O português permite vogais nasais puras (sem consoante nasal pronunciada)",
+        "As vogais nasais são articuladas com o véu palatino abaixado, permitindo a passagem de ar pelo nariz"
+      ],
+      "exercicios": [
+        {
+          "pergunta": "Em qual palavra ocorre o fenómeno da nasalização?",
+          "opcoes": [
+            "casa",
+            "faca",
+            "tempo",
+            "prato"
+          ],
+          "respostaCorreta": 2,
+          "feedbackPositivo": "Correto! Em 'tempo', a vogal 'e' é nasalizada devido à consoante nasal 'm' que a segue, resultando em 'tẽpo'.",
+          "feedbackNegativo": "Não está correto. A nasalização ocorre quando uma vogal adquire nasalidade, geralmente por influência de uma consoante nasal como 'm' ou 'n', como acontece em 'tempo'."
+        },
+        {
+          "pergunta": "Como se pronuncia a vogal 'a' na palavra 'canto' no português europeu?",
+          "opcoes": [
+            "Como o 'a' em 'pato' (oral)",
+            "Como o 'ã' em 'maçã' (nasal)",
+            "Como o 'á' em 'café' (oral e acentuado)",
+            "Como o 'à' em 'à tarde' (oral e grave)"
+          ],
+          "respostaCorreta": 1,
+          "feedbackPositivo": "Exato! Em 'canto', a vogal 'a' é nasalizada devido à consoante nasal 'n' que a segue, resultando em 'cãto', semelhante ao 'ã' em 'maçã'.",
+          "feedbackNegativo": "Incorreto. No português europeu, quando uma vogal é seguida por uma consoante nasal na mesma sílaba, como em 'canto', ela adquire nasalidade, pronunciando-se como o 'ã' em 'maçã'."
+        },
+        {
+          "pergunta": "Qual destas palavras apresenta a menor nasalização no português europeu?",
+          "opcoes": [
+            "cama",
+            "banco",
+            "tinta",
+            "anel"
+          ],
+          "respostaCorreta": 3,
+          "feedbackPositivo": "Correto! Em 'anel', a nasalização é menos perceptível porque a consoante nasal 'n' está no início da segunda sílaba, não no final da primeira, como nas outras palavras.",
+          "feedbackNegativo": "Não está correto. A nasalização é mais forte quando a consoante nasal está no fim da sílaba. Em 'anel', o 'n' está no início da segunda sílaba, causando menor nasalização do que em palavras como 'banco' ou 'tinta'."
+        },
+        {
+          "pergunta": "Nas línguas românicas, qual característica fonética distingue particularmente o português?",
+          "opcoes": [
+            "A abundância de consoantes fricativas",
+            "O uso extensivo de vogais nasais",
+            "A ausência de ditongos",
+            "O acento tónico na última sílaba"
+          ],
+          "respostaCorreta": 1,
+          "feedbackPositivo": "Correto! Entre as línguas românicas, o português distingue-se pelo uso extensivo de vogais nasais, um traço fonético que o diferencia notoriamente do espanhol, italiano e outras línguas da mesma família.",
+          "feedbackNegativo": "Não está correto. Uma característica distintiva do português em relação às outras línguas românicas é o seu uso extensivo de vogais nasais, um traço fonético particular que não é tão presente em línguas como o espanhol ou o italiano."
+        }
+      ]
+    },
+    {
+      "id": "vocalização",
+      "nome": "Vocalização",
+      "descricaoBreve": "Transformação de uma consoante em vogal ou semivogal",
+      "descricao": "A vocalização é um fenómeno fonético que consiste na transformação de uma consoante em vogal ou semivogal. Este processo foi importante na evolução histórica do latim para o português e continua presente em alguns contextos da língua atual.",
+      "explicacao": "Quando uma consoante se encontra em posição final de sílaba ou em contextos de difícil articulação, pode transformar-se em vogal ou semivogal para facilitar a pronúncia. No português, a vocalização do 'l' em final de sílaba para 'u' é um dos exemplos mais conhecidos.",
+      "usosComuns": "Muito frequente no português brasileiro com o 'l' em final de sílaba, menos comum no português europeu moderno.",
+      "exemplos": [
+        {
+          "antes": "mal (latim)",
+          "depois": "mau (português)",
+          "explicacao": "No processo histórico, o 'l' final vocalizou-se em 'u', formando o ditongo 'au'."
+        },
+        {
+          "antes": "Brasil (pt-PT)",
+          "depois": "Brasiu (pt-BR)",
+          "explicacao": "No português brasileiro atual, o 'l' em final de sílaba frequentemente vocaliza-se em 'u'."
+        },
+        {
+          "antes": "alto (pt-PT)",
+          "depois": "auto (pt-BR)",
+          "explicacao": "O 'l' antes de consoante, como em 'alto', vocaliza-se em 'u' no português brasileiro, resultando em 'auto'."
+        },
+        {
+          "antes": "salto (pt-PT)",
+          "depois": "sauto (pt-BR)",
+          "explicacao": "Semelhante ao exemplo anterior, o 'l' antes da consoante 't' vocaliza-se em 'u' no português brasileiro."
+        }
+      ],
+      "historico": [
+        "A vocalização foi um processo importante na evolução do latim para o português",
+        "Palavras como 'alteru' (latim) → 'outro' (português) mostram a vocalização do 'l' para 'u'",
+        "No português medieval, a vocalização era mais comum em ambas as variantes",
+        "Hoje, a vocalização do 'l' para 'u' é mais característica do português brasileiro, enquanto no português europeu o 'l' velarizado (mais 'escuro') é mantido"
+      ],
+      "exercicios": [
+        {
+          "pergunta": "Qual fenómeno fonético ocorre na evolução da palavra latina 'alteru' para o português 'outro'?",
+          "opcoes": [
+            "Assimilação",
+            "Metátese",
+            "Vocalização",
+            "Síncope"
+          ],
+          "respostaCorreta": 2,
+          "feedbackPositivo": "Correto! Na evolução de 'alteru' para 'outro', o 'l' vocalizou-se em 'u', formando o ditongo 'ou', caracterizando o fenómeno da vocalização.",
+          "feedbackNegativo": "Não está correto. A transformação do 'l' em 'u' na evolução de 'alteru' para 'outro' é um caso típico de vocalização, onde uma consoante se transforma em vogal ou semivogal."
+        },
+        {
+          "pergunta": "Como é pronunciada a palavra 'Brasil' no português brasileiro padrão?",
+          "opcoes": [
+            "Bra-sil (com o 'l' pronunciado como em português europeu)",
+            "Bra-siu (com o 'l' vocalizado em 'u')",
+            "Bra-si (com o 'l' eliminado)",
+            "Bra-sir (com o 'l' pronunciado como 'r')"
+          ],
+          "respostaCorreta": 1,
+          "feedbackPositivo": "Exato! No português brasileiro padrão, o 'l' em final de sílaba ou palavra, como em 'Brasil', é tipicamente vocalizado para 'u', resultando na pronúncia 'Brasiu'.",
+          "feedbackNegativo": "Incorreto. No português brasileiro, o 'l' em posição final de sílaba ou palavra geralmente sofre vocalização, transformando-se em 'u', como em 'Brasil → Brasiu'."
+        },
+        {
+          "pergunta": "Qual a diferença principal entre o português europeu e o brasileiro quanto à pronúncia do 'l' em final de sílaba?",
+          "opcoes": [
+            "No português europeu, o 'l' é velarizado (mais 'escuro'), enquanto no brasileiro tende a vocalizar-se em 'u'",
+            "No português europeu, o 'l' é sempre mudo, enquanto no brasileiro é sempre pronunciado",
+            "No português europeu, o 'l' vocaliza-se em 'i', enquanto no brasileiro vocaliza-se em 'u'",
+            "Não há diferença significativa na pronúncia do 'l' entre as duas variantes"
+          ],
+          "respostaCorreta": 0,
+          "feedbackPositivo": "Correto! No português europeu, o 'l' em final de sílaba é velarizado (pronunciado mais 'escuro', com o dorso da língua elevado), enquanto no português brasileiro, esse mesmo 'l' tende a vocalizar-se em 'u'.",
+          "feedbackNegativo": "Não está correto. A principal diferença na pronúncia do 'l' em final de sílaba entre o português europeu e o brasileiro é que no europeu, o 'l' é velarizado (pronunciado mais 'escuro'), enquanto no brasileiro tende a vocalizar-se em 'u'."
+        },
+        {
+          "pergunta": "Qual palavra exemplifica um caso de vocalização histórica do latim para o português?",
+          "opcoes": [
+            "porta (latim) → porta (português)",
+            "mensa (latim) → mesa (português)",
+            "falsu (latim) → falso (português)",
+            "palma (latim) → pauma (português arcaico)"
+          ],
+          "respostaCorreta": 3,
+          "feedbackPositivo": "Correto! A evolução de 'palma' (latim) para 'pauma' (português arcaico) exemplifica a vocalização histórica do 'l' em 'u' quando se encontrava antes de uma consoante.",
+          "feedbackNegativo": "Não está correto. A vocalização histórica do latim para o português pode ser observada na evolução de 'palma' para 'pauma' no português arcaico, onde o 'l' se transformou na semivogal 'u'."
+        }
+      ]
+    }
+  ]
+}
