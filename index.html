@@ -1,0 +1,711 @@
+import React, { useState, useEffect } from 'react';
+import { AlertCircle, BookOpen, Check, ChevronLeft, ChevronRight, HelpCircle, Home, Volume2 } from 'lucide-react';
+
+// Componente principal da aplicação
+const FoneticaPT = () => {
+  const [dados, setDados] = useState(null);
+  const [ecra, setEcra] = useState('inicio');
+  const [fenomenoAtual, setFenomenoAtual] = useState(null);
+  const [exercicioAtual, setExercicioAtual] = useState(null);
+  const [respostaSelecionada, setRespostaSelecionada] = useState(null);
+  const [resultado, setResultado] = useState(null);
+  const [progresso, setProgresso] = useState({});
+  const [carregando, setCarregando] = useState(true);
+  
+  // Simular carregamento de dados JSON (em produção, isso seria uma chamada fetch)
+  useEffect(() => {
+    setTimeout(() => {
+      setDados(dadosFonetica);
+      setCarregando(false);
+      
+      // Verificar progresso salvo no localStorage
+      const progressoSalvo = localStorage.getItem('progressoFoneticaPT');
+      if (progressoSalvo) {
+        setProgresso(JSON.parse(progressoSalvo));
+      } else {
+        // Inicializar progresso
+        const novoProgresso = {};
+        dadosFonetica.fenomenos.forEach(fenomeno => {
+          novoProgresso[fenomeno.id] = {
+            visualizado: false,
+            exerciciosCompletos: 0,
+            pontuacao: 0
+          };
+        });
+        setProgresso(novoProgresso);
+        localStorage.setItem('progressoFoneticaPT', JSON.stringify(novoProgresso));
+      }
+    }, 1000);
+  }, []);
+  
+  // Calcular progresso geral
+  const calcularProgressoGeral = () => {
+    if (!dados) return 0;
+    
+    const total = dados.fenomenos.length;
+    const completados = Object.values(progresso).filter(p => p.visualizado).length;
+    return Math.round((completados / total) * 100);
+  };
+  
+  const irParaFenomeno = (fenomeno) => {
+    setFenomenoAtual(fenomeno);
+    setEcra('fenomeno');
+    
+    // Marcar como visualizado
+    const novoProgresso = {...progresso};
+    novoProgresso[fenomeno.id].visualizado = true;
+    setProgresso(novoProgresso);
+    localStorage.setItem('progressoFoneticaPT', JSON.stringify(novoProgresso));
+  };
+  
+  const iniciarExercicio = (fenomeno) => {
+    setExercicioAtual(0);
+    setEcra('exercicio');
+  };
+  
+  const verificarResposta = (opcao) => {
+    setRespostaSelecionada(opcao);
+    
+    const exercicio = fenomenoAtual.exercicios[exercicioAtual];
+    const correto = opcao === exercicio.respostaCorreta;
+    
+    setResultado({
+      correto,
+      feedback: correto ? exercicio.feedbackPositivo : exercicio.feedbackNegativo
+    });
+    
+    // Atualizar pontuação
+    if (correto) {
+      const novoProgresso = {...progresso};
+      novoProgresso[fenomenoAtual.id].pontuacao += 10;
+      novoProgresso[fenomenoAtual.id].exerciciosCompletos += 1;
+      setProgresso(novoProgresso);
+      localStorage.setItem('progressoFoneticaPT', JSON.stringify(novoProgresso));
+    }
+  };
+  
+  const proximoExercicio = () => {
+    if (exercicioAtual < fenomenoAtual.exercicios.length - 1) {
+      setExercicioAtual(exercicioAtual + 1);
+      setRespostaSelecionada(null);
+      setResultado(null);
+    } else {
+      setEcra('conclusao');
+    }
+  };
+  
+  // Componente para simular reprodução de áudio
+  const BotaoAudio = ({ texto }) => {
+    const reproduzir = () => {
+      // Em produção, isso seria uma chamada real a uma API de text-to-speech
+      alert(`A reproduzir: "${texto}"`);
+    };
+    
+    return (
+      <button 
+        onClick={reproduzir}
+        className="flex items-center gap-2 text-blue-600 hover:text-blue-800"
+      >
+        <Volume2 size={18} />
+        <span>Ouvir pronúncia</span>
+      </button>
+    );
+  };
+  
+  if (carregando) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-4">
+        <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+        <p className="mt-4 text-lg">A carregar FonéticaPT...</p>
+      </div>
+    );
+  }
+  
+  // Ecrã inicial
+  if (ecra === 'inicio') {
+    return (
+      <div className="min-h-screen bg-gray-50 p-4">
+        <header className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-blue-600 mb-2">FonéticaPT</h1>
+          <p className="text-gray-600">Descobre os fenómenos fonéticos do Português Europeu</p>
+        </header>
+        
+        <div className="mb-6">
+          <div className="flex justify-between items-center mb-2">
+            <span className="font-medium">Progresso geral</span>
+            <span className="text-blue-600 font-bold">{calcularProgressoGeral()}%</span>
+          </div>
+          <div className="w-full bg-gray-200 rounded-full h-4">
+            <div 
+              className="bg-blue-600 rounded-full h-4 transition-all duration-500"
+              style={{ width: `${calcularProgressoGeral()}%` }}
+            ></div>
+          </div>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+          {dados.fenomenos.map(fenomeno => (
+            <div 
+              key={fenomeno.id}
+              className={`p-4 rounded-lg shadow-md cursor-pointer transition-all hover:shadow-lg
+              ${progresso[fenomeno.id]?.visualizado ? 'bg-blue-50 border border-blue-200' : 'bg-white'}`}
+              onClick={() => irParaFenomeno(fenomeno)}
+            >
+              <div className="flex justify-between items-center">
+                <h2 className="text-xl font-bold">{fenomeno.nome}</h2>
+                {progresso[fenomeno.id]?.visualizado && (
+                  <Check size={20} className="text-green-500" />
+                )}
+              </div>
+              <p className="text-gray-600 mt-2">{fenomeno.descricaoBreve}</p>
+              {progresso[fenomeno.id]?.exerciciosCompletos > 0 && (
+                <div className="mt-2 text-sm text-blue-600">
+                  {progresso[fenomeno.id].exerciciosCompletos} exercícios concluídos • 
+                  {progresso[fenomeno.id].pontuacao} pontos
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+        
+        <footer className="text-center text-gray-500 text-sm">
+          <p>FonéticaPT © 2025 • Desenvolvido para o ensino do Português Europeu</p>
+        </footer>
+      </div>
+    );
+  }
+  
+  // Ecrã de detalhe do fenómeno
+  if (ecra === 'fenomeno') {
+    return (
+      <div className="min-h-screen bg-gray-50 p-4">
+        <header className="flex items-center mb-6">
+          <button 
+            onClick={() => setEcra('inicio')}
+            className="mr-4 p-2 rounded-full hover:bg-gray-200 transition-colors"
+          >
+            <ChevronLeft size={24} />
+          </button>
+          <h1 className="text-2xl font-bold">{fenomenoAtual.nome}</h1>
+        </header>
+        
+        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+          <div className="mb-6">
+            <h2 className="text-xl font-semibold mb-2">O que é?</h2>
+            <p className="text-gray-700 leading-relaxed">{fenomenoAtual.descricao}</p>
+          </div>
+          
+          <div className="mb-6">
+            <h2 className="text-xl font-semibold mb-2">Como ocorre</h2>
+            <p className="text-gray-700 leading-relaxed">{fenomenoAtual.explicacao}</p>
+          </div>
+          
+          <div className="mb-6">
+            <h2 className="text-xl font-semibold mb-2">Exemplos</h2>
+            <div className="space-y-4">
+              {fenomenoAtual.exemplos.map((exemplo, index) => (
+                <div key={index} className="p-3 bg-gray-50 rounded-lg">
+                  <div className="font-medium">{exemplo.antes} → {exemplo.depois}</div>
+                  <div className="text-gray-600 mt-1">{exemplo.explicacao}</div>
+                  <div className="mt-2">
+                    <BotaoAudio texto={exemplo.depois} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        
+        <div className="flex justify-between">
+          <button 
+            onClick={() => setEcra('inicio')}
+            className="flex items-center gap-2 px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors"
+          >
+            <Home size={18} />
+            <span>Voltar ao início</span>
+          </button>
+          
+          <button 
+            onClick={() => iniciarExercicio(fenomenoAtual)}
+            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            <BookOpen size={18} />
+            <span>Fazer exercícios</span>
+          </button>
+        </div>
+      </div>
+    );
+  }
+  
+  // Ecrã de exercício
+  if (ecra === 'exercicio') {
+    const exercicio = fenomenoAtual.exercicios[exercicioAtual];
+    
+    return (
+      <div className="min-h-screen bg-gray-50 p-4">
+        <header className="flex items-center justify-between mb-6">
+          <button 
+            onClick={() => setEcra('fenomeno')}
+            className="p-2 rounded-full hover:bg-gray-200 transition-colors"
+          >
+            <ChevronLeft size={24} />
+          </button>
+          <div className="text-gray-600">
+            Exercício {exercicioAtual + 1} de {fenomenoAtual.exercicios.length}
+          </div>
+        </header>
+        
+        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+          <h2 className="text-xl font-semibold mb-4">{exercicio.pergunta}</h2>
+          
+          {exercicio.contextoPrevio && (
+            <div className="p-4 bg-blue-50 rounded-lg mb-4">
+              <p className="text-gray-700">{exercicio.contextoPrevio}</p>
+            </div>
+          )}
+          
+          <div className="space-y-3 mb-6">
+            {exercicio.opcoes.map((opcao, index) => (
+              <button
+                key={index}
+                onClick={() => !resultado && verificarResposta(index)}
+                className={`w-full text-left p-3 rounded-lg border transition-colors
+                ${respostaSelecionada === index 
+                  ? (resultado?.correto ? 'bg-green-100 border-green-500' : 'bg-red-100 border-red-500')
+                  : 'hover:bg-gray-100 border-gray-300'}
+                ${resultado && index === exercicio.respostaCorreta && 'bg-green-100 border-green-500'}
+                ${resultado ? 'cursor-default' : 'cursor-pointer'}`}
+                disabled={resultado !== null}
+              >
+                <div className="font-medium">{opcao}</div>
+              </button>
+            ))}
+          </div>
+          
+          {resultado && (
+            <div className={`p-4 rounded-lg mb-6 ${resultado.correto ? 'bg-green-100' : 'bg-red-100'}`}>
+              <div className="font-bold mb-2">
+                {resultado.correto ? 'Correto!' : 'Incorreto!'}
+              </div>
+              <p>{resultado.feedback}</p>
+            </div>
+          )}
+          
+          {resultado && (
+            <div className="flex justify-end">
+              <button
+                onClick={proximoExercicio}
+                className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                <span>{exercicioAtual < fenomenoAtual.exercicios.length - 1 ? 'Próximo exercício' : 'Ver resultados'}</span>
+                <ChevronRight size={18} />
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+  
+  // Ecrã de conclusão
+  if (ecra === 'conclusao') {
+    const pontuacaoTotal = progresso[fenomenoAtual.id].pontuacao;
+    const percentagemAcerto = Math.round((pontuacaoTotal / (fenomenoAtual.exercicios.length * 10)) * 100);
+    
+    return (
+      <div className="min-h-screen bg-gray-50 p-4">
+        <div className="bg-white rounded-lg shadow-md p-6 mx-auto max-w-lg mt-10">
+          <div className="text-center mb-6">
+            <h1 className="text-2xl font-bold mb-2">Parabéns!</h1>
+            <p className="text-gray-600">Concluíste todos os exercícios sobre "{fenomenoAtual.nome}"</p>
+          </div>
+          
+          <div className="text-center mb-6">
+            <div className="inline-block p-4 bg-blue-100 rounded-full mb-3">
+              <Check size={48} className="text-blue-600" />
+            </div>
+            <div className="text-3xl font-bold text-blue-600">{pontuacaoTotal} pontos</div>
+            <div className="text-gray-600">Percentagem de acerto: {percentagemAcerto}%</div>
+          </div>
+          
+          <div className="space-y-4 mb-6">
+            {percentagemAcerto === 100 && (
+              <div className="p-4 bg-green-100 rounded-lg text-center">
+                <p className="font-medium text-green-800">Perfeito! Dominaste este fenómeno fonético.</p>
+              </div>
+            )}
+            
+            {percentagemAcerto >= 70 && percentagemAcerto < 100 && (
+              <div className="p-4 bg-blue-100 rounded-lg text-center">
+                <p className="font-medium text-blue-800">Muito bom! Compreendeste bem este fenómeno fonético.</p>
+              </div>
+            )}
+            
+            {percentagemAcerto < 70 && (
+              <div className="p-4 bg-yellow-100 rounded-lg text-center">
+                <p className="font-medium text-yellow-800">Bom esforço! Podes rever o conteúdo e tentar novamente para melhorar.</p>
+              </div>
+            )}
+          </div>
+          
+          <div className="flex flex-col gap-3">
+            <button
+              onClick={() => {
+                setExercicioAtual(0);
+                setRespostaSelecionada(null);
+                setResultado(null);
+                setEcra('exercicio');
+              }}
+              className="flex items-center justify-center gap-2 px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors"
+            >
+              <BookOpen size={18} />
+              <span>Repetir exercícios</span>
+            </button>
+            
+            <button
+              onClick={() => setEcra('fenomeno')}
+              className="flex items-center justify-center gap-2 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors"
+            >
+              <HelpCircle size={18} />
+              <span>Rever conteúdo</span>
+            </button>
+            
+            <button
+              onClick={() => setEcra('inicio')}
+              className="flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              <Home size={18} />
+              <span>Voltar ao início</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  
+  return <div>Erro ao carregar a aplicação</div>;
+};
+
+// Dados de exemplo (este seria o arquivo JSON)
+const dadosFonetica = {
+  "appInfo": {
+    "nome": "FonéticaPT",
+    "versao": "1.0.0",
+    "descricao": "Aplicação para estudo dos fenómenos fonéticos do Português Europeu"
+  },
+  "fenomenos": [
+    {
+      "id": "elisao",
+      "nome": "Elisão",
+      "descricaoBreve": "Supressão de vogal átona final quando a palavra seguinte começa por vogal",
+      "descricao": "A elisão é um fenómeno fonético que consiste na supressão de uma vogal átona final quando a palavra seguinte começa por vogal. É um fenómeno muito comum no português europeu e contribui para o ritmo característico da pronúncia portuguesa.",
+      "explicacao": "Na fala corrente do português europeu, quando uma palavra termina em vogal átona (geralmente 'e') e a palavra seguinte começa por vogal, a vogal final da primeira palavra tende a desaparecer, criando uma ligação entre as duas palavras na pronúncia.",
+      "exemplos": [
+        {
+          "antes": "de acordo",
+          "depois": "d'acordo",
+          "explicacao": "A vogal 'e' da preposição 'de' é eliminada porque a palavra seguinte ('acordo') começa com a vogal 'a'."
+        },
+        {
+          "antes": "este assunto",
+          "depois": "est'assunto",
+          "explicacao": "O 'e' final de 'este' desaparece na pronúncia porque 'assunto' começa com a vogal 'a'."
+        },
+        {
+          "antes": "noite escura",
+          "depois": "noit'escura",
+          "explicacao": "O 'e' final de 'noite' é eliminado pois a palavra seguinte 'escura' começa com a vogal 'e'."
+        }
+      ],
+      "exercicios": [
+        {
+          "pergunta": "Em qual das seguintes frases ocorre o fenómeno da elisão na pronúncia?",
+          "opcoes": [
+            "A casa branca",
+            "O livro antigo",
+            "Um pássaro azul",
+            "Dois cães pretos"
+          ],
+          "respostaCorreta": 1,
+          "feedbackPositivo": "Correto! Em 'O livro antigo', o 'o' final de 'livro' e o 'a' inicial de 'antigo' encontram-se, causando a elisão na pronúncia natural: 'livr'antigo'.",
+          "feedbackNegativo": "Não é correto. Nas outras opções não ocorre elisão porque ou as palavras não terminam em vogal átona, ou a palavra seguinte não começa por vogal, ou ambos."
+        },
+        {
+          "pergunta": "Como se pronunciaria corretamente a expressão 'de acordo com' no português europeu falado?",
+          "opcoes": [
+            "de-a-cor-do-com",
+            "de a-cor-do com",
+            "d'a-cor-do-com",
+            "de-a-cor-do com"
+          ],
+          "respostaCorreta": 2,
+          "feedbackPositivo": "Exatamente! Na pronúncia natural do português europeu, ocorre elisão entre 'de' e 'acordo', resultando em 'd'acordo com'.",
+          "feedbackNegativo": "Essa não é a pronúncia típica. No português europeu, a vogal 'e' em 'de' é eliminada porque a palavra seguinte ('acordo') começa com vogal, resultando em 'd'acordo com'."
+        },
+        {
+          "pergunta": "Qual é a transcrição mais próxima da pronúncia real de 'Precisamos de ajuda' no português europeu?",
+          "opcoes": [
+            "Pre-ci-sa-mos de a-ju-da",
+            "Pre-ci-sa-mos-de a-ju-da",
+            "Pre-ci-sa-mos d'a-ju-da", 
+            "Pre-ci-sa-mos de-a-ju-da"
+          ],
+          "respostaCorreta": 2,
+          "feedbackPositivo": "Correto! A preposição 'de' sofre elisão antes de 'ajuda', que começa com vogal, resultando na pronúncia 'precisamos d'ajuda'.",
+          "feedbackNegativo": "Incorreto. No português europeu, quando 'de' é seguido por uma palavra que começa com vogal (como 'ajuda'), ocorre elisão da vogal 'e', resultando em 'd'ajuda'."
+        }
+      ]
+    },
+    {
+      "id": "crase",
+      "nome": "Crase",
+      "descricaoBreve": "Fusão de duas vogais iguais em uma só",
+      "descricao": "A crase é um fenómeno fonético que consiste na fusão de duas vogais iguais que se encontram, resultando numa única vogal, geralmente mais prolongada. Não confundir com o acento grave (`) que marca a crase da preposição 'a' com o artigo 'a'.",
+      "explicacao": "Quando duas vogais idênticas se encontram no discurso, seja entre palavras ou dentro de uma mesma palavra (após a queda de uma consoante), elas tendem a fundir-se numa única vogal, frequentemente com maior duração. Este fenómeno é muito comum no português europeu e contribui para o ritmo da língua.",
+      "exemplos": [
+        {
+          "antes": "a alma",
+          "depois": "alma",
+          "explicacao": "O artigo 'a' e o 'a' inicial de 'alma' fundem-se numa única vogal, embora na escrita mantenhamos as duas vogais."
+        },
+        {
+          "antes": "contra a",
+          "depois": "contrà",
+          "explicacao": "O 'a' final de 'contra' e o artigo 'a' fundem-se na pronúncia, formando um único som."
+        },
+        {
+          "antes": "para a escola",
+          "depois": "prà escola",
+          "explicacao": "Além da redução de 'para' para 'pra' (síncope), ocorre a crase entre o 'a' final de 'pra' e o artigo 'a', resultando em 'prà'."
+        }
+      ],
+      "exercicios": [
+        {
+          "pergunta": "Em qual das seguintes expressões ocorre o fenómeno da crase fonética?",
+          "opcoes": [
+            "casa amarela",
+            "toda a turma",
+            "bela história",
+            "grande evento"
+          ],
+          "respostaCorreta": 1,
+          "feedbackPositivo": "Correto! Em 'toda a turma', o 'a' final de 'toda' e o artigo 'a' fundem-se num único som, resultando numa crase fonética (toda a → todà).",
+          "feedbackNegativo": "Não está correto. A crase fonética ocorre quando duas vogais iguais se fundem num único som, como acontece em 'toda a turma', onde o 'a' final de 'toda' se funde com o artigo 'a'."
+        },
+        {
+          "pergunta": "Identifique a frase onde há crase fonética na pronúncia natural do português europeu:",
+          "opcoes": [
+            "Vou para o mercado",
+            "Ele chegou cedo",
+            "Passa a ponte",
+            "Leva o livro"
+          ],
+          "respostaCorreta": 2,
+          "feedbackPositivo": "Exatamente! Em 'Passa a ponte', o 'a' final do verbo 'passa' funde-se com o artigo 'a', formando uma única vogal na pronúncia (passà ponte).",
+          "feedbackNegativo": "Essa não é a resposta correta. A crase fonética ocorre quando duas vogais iguais se encontram e se fundem, como em 'Passa a ponte', onde o 'a' final de 'passa' funde-se com o artigo 'a'."
+        },
+        {
+          "pergunta": "Como seria a pronúncia natural da expressão 'para aquele' no português europeu?",
+          "contextoPrevio": "Observe a pronúncia na frase: 'Vamos para aquele parque'",
+          "opcoes": [
+            "pa-ra a-que-le",
+            "pa-ra-a-que-le",
+            "pra-que-le",
+            "prà-que-le"
+          ],
+          "respostaCorreta": 3,
+          "feedbackPositivo": "Correto! No português europeu coloquial, 'para' frequentemente reduz-se para 'pra', e depois ocorre crase entre o 'a' final de 'pra' e o 'a' inicial de 'aquele', resultando em 'pràquele'.",
+          "feedbackNegativo": "Não está correto. No português europeu coloquial, a preposição 'para' geralmente reduz-se para 'pra', e depois o 'a' final funde-se com o 'a' inicial de 'aquele', formando 'pràquele'."
+        }
+      ]
+    },
+    {
+      "id": "assimilacao",
+      "nome": "Assimilação",
+      "descricaoBreve": "Um som modifica-se para se tornar mais semelhante a outro som próximo",
+      "descricao": "A assimilação é um fenómeno fonético em que um som se modifica e adquire características de outro som que se encontra perto dele. Este fenómeno é muito comum em todas as línguas e é responsável por muitas variações na pronúncia.",
+      "explicacao": "Na assimilação, um fonema adquire traços do fonema vizinho, tornando-se mais semelhante a ele. Este processo facilita a articulação, tornando a pronúncia mais fluida e natural. A assimilação pode ser progressiva (quando um som afeta o som seguinte) ou regressiva (quando um som é afetado pelo som seguinte).",
+      "exemplos": [
+        {
+          "antes": "pense",
+          "depois": "pẽse",
+          "explicacao": "A consoante nasal 'n' transmite a nasalidade para a vogal anterior 'e', que se torna nasalizada."
+        },
+        {
+          "antes": "desde",
+          "depois": "dezde",
+          "explicacao": "A consoante sonora 'd' influencia o 's', que se sonoriza e se pronuncia como 'z'."
+        },
+        {
+          "antes": "mesmo",
+          "depois": "mêzmo",
+          "explicacao": "O 's' entre vogais assimila a sonoridade das vogais e pronuncia-se como 'z'. Além disso, a consoante nasal 'm' nasaliza a vogal 'e'."
+        }
+      ],
+      "exercicios": [
+        {
+          "pergunta": "Em qual palavra ocorre assimilação de nasalidade no português europeu?",
+          "opcoes": [
+            "casa",
+            "porta",
+            "antes",
+            "prato"
+          ],
+          "respostaCorreta": 2,
+          "feedbackPositivo": "Correto! Em 'antes', o 'n' transmite a sua nasalidade para a vogal 'a', que se torna nasalizada, resultando em 'ãtes'.",
+          "feedbackNegativo": "Não está correto. A assimilação de nasalidade ocorre quando uma consoante nasal (como 'm' ou 'n') transmite a nasalidade para a vogal vizinha, como acontece em 'antes'."
+        },
+        {
+          "pergunta": "Qual das seguintes palavras apresenta o fenómeno de assimilação de sonoridade?",
+          "opcoes": [
+            "facto",
+            "rasgo",
+            "pasta",
+            "cantar"
+          ],
+          "respostaCorreta": 1,
+          "feedbackPositivo": "Exatamente! Em 'rasgo', o 's' assimila a sonoridade da consoante seguinte 'g' (que é sonora) e pronuncia-se como 'z', resultando em 'razgo'.",
+          "feedbackNegativo": "Incorreto. A assimilação de sonoridade ocorre quando uma consoante surda se torna sonora por influência de um som sonoro vizinho, como acontece em 'rasgo', onde o 's' se pronuncia como 'z'."
+        },
+        {
+          "pergunta": "Como se pronuncia o 's' na palavra 'esbelto' no português europeu?",
+          "opcoes": [
+            "Como 's' em 'sapo'",
+            "Como 'z' em 'casa'",
+            "Como 'ch' em 'chuva'",
+            "É mudo, não se pronuncia"
+          ],
+          "respostaCorreta": 1,
+          "feedbackPositivo": "Correto! Em 'esbelto', o 's' assimila a sonoridade da consoante sonora 'b' que o segue, pronunciando-se como 'z', tal como em 'casa'.",
+          "feedbackNegativo": "Não está correto. Quando o 's' está antes de uma consoante sonora como 'b', 'd', 'g', 'v', 'm', ele assimila essa sonoridade e pronuncia-se como 'z'."
+        }
+      ]
+    },
+    {
+      "id": "queda",
+      "nome": "Queda (Apócope, Síncope, Aférese)",
+      "descricaoBreve": "Supressão de sons em diferentes posições da palavra",
+      "descricao": "A queda ou supressão de sons é um fenómeno fonético muito comum que pode ocorrer em diferentes posições da palavra. Dependendo da posição onde ocorre, recebe nomes específicos: aférese (início), síncope (meio) e apócope (fim).",
+      "explicacao": "A língua portuguesa falada, especialmente o português europeu, caracteriza-se por uma forte tendência à redução vocálica e à supressão de sons em palavras, especialmente em contextos informais e na fala rápida. Este fenómeno contribui para o ritmo característico do português europeu e para a impressão, para ouvidos não treinados, de que 'os portugueses comem as palavras'.",
+      "exemplos": [
+        {
+          "antes": "estar",
+          "depois": "tar",
+          "explicacao": "Aférese: queda do 'es' inicial, muito comum no português europeu coloquial."
+        },
+        {
+          "antes": "para",
+          "depois": "pra",
+          "explicacao": "Síncope: queda da vogal átona no meio da palavra (embora neste caso seja mais corretamente entre sílabas)."
+        },
+        {
+          "antes": "grande",
+          "depois": "grand",
+          "explicacao": "Apócope: queda do 'e' final átono, fenómeno extremamente comum no português europeu."
+        }
+      ],
+      "exercicios": [
+        {
+          "pergunta": "Qual fenómeno fonético ocorre na pronúncia de 'telefone' como 'telefon' no português europeu?",
+          "opcoes": [
+            "Síncope",
+            "Aférese",
+            "Apócope",
+            "Epêntese"
+          ],
+          "respostaCorreta": 2,
+          "feedbackPositivo": "Correto! Apócope é a queda de som no final da palavra. Quando 'telefone' é pronunciado como 'telefon', ocorre a queda do 'e' final, caracterizando uma apócope.",
+          "feedbackNegativo": "Não está correto. Quando um som cai no final da palavra, como o 'e' em 'telefone', temos o fenómeno da apócope."
+        },
+        {
+          "pergunta": "Em qual opção ocorre o fenómeno da síncope?",
+          "opcoes": [
+            "Espera → Pera",
+            "Outro → Otru",
+            "Médico → Médco",
+            "Trabalhar → Trabalha"
+          ],
+          "respostaCorreta": 2,
+          "feedbackPositivo": "Exato! Em 'médico → médco', há a queda da vogal 'i' no meio da palavra, o que caracteriza uma síncope.",
+          "feedbackNegativo": "Incorreto. A síncope é a queda de som no meio da palavra, como acontece em 'médico → médco', onde o 'i' é suprimido."
+        },
+        {
+          "pergunta": "Na fala coloquial do português europeu, como se pronuncia frequentemente a palavra 'estava'?",
+          "opcoes": [
+            "estav",
+            "tava",
+            "estava",
+            "stava"
+          ],
+          "respostaCorreta": 1,
+          "feedbackPositivo": "Correto! Na fala coloquial do português europeu, é muito comum ocorrer aférese na palavra 'estava', com a queda dos sons iniciais 'es', resultando em 'tava'.",
+          "feedbackNegativo": "Essa não é a forma mais comum na fala coloquial portuguesa. A palavra 'estava' frequentemente sofre aférese (queda de sons iniciais), sendo pronunciada como 'tava'."
+        }
+      ]
+    },
+    {
+      "id": "metafonia",
+      "nome": "Metafonia",
+      "descricaoBreve": "Alteração do timbre de uma vogal por influência de outra",
+      "descricao": "A metafonia é um fenómeno fonético que consiste na alteração do timbre (abertura ou fechamento) de uma vogal tónica por influência de uma vogal final. É um fenómeno particularmente importante na formação do plural de muitas palavras do português.",
+      "explicacao": "Na metafonia, a vogal tónica de uma palavra pode abrir ou fechar o seu timbre devido à influência de outra vogal, geralmente a final. Este fenómeno explica, por exemplo, porque algumas palavras mudam o timbre da vogal tónica quando vão para o plural, como 'ovo' [o fechado] → 'ovos' [o aberto].",
+      "exemplos": [
+        {
+          "antes": "ovo [óvu] (singular)",
+          "depois": "ovos [ɔvuʃ] (plural)",
+          "explicacao": "A vogal tónica 'o' fechada no singular abre-se no plural por influência da terminação '-os'."
+        },
+        {
+          "antes": "porco [pórku] (singular)",
+          "depois": "porcos [pɔrkuʃ] (plural)",
+          "explicacao": "O 'o' tónico fechado do singular abre-se no plural devido à terminação '-os'."
+        },
+        {
+          "antes": "novo [nóvu] (singular)",
+          "depois": "novos [nɔvuʃ] (plural)",
+          "explicacao": "O mesmo fenómeno ocorre aqui: o 'o' tónico fechado do singular abre-se no plural."
+        }
+      ],
+      "exercicios": [
+        {
+          "pergunta": "Qual par de palavras exemplifica corretamente o fenómeno da metafonia no português europeu?",
+          "opcoes": [
+            "casa → casas",
+            "gato → gatos",
+            "corpo → corpos",
+            "livro → livros"
+          ],
+          "respostaCorreta": 2,
+          "feedbackPositivo": "Correto! No par 'corpo → corpos', o 'o' tónico fechado do singular ('côrpo') abre-se no plural ('córpos'), caracterizando a metafonia.",
+          "feedbackNegativo": "Não está correto. A metafonia ocorre quando a vogal tónica muda de timbre do singular para o plural, como em 'corpo → corpos', onde o 'o' fechado do singular abre-se no plural."
+        },
+        {
+          "pergunta": "Como se pronuncia a vogal tónica no plural da palavra 'jogo' no português europeu?",
+          "opcoes": [
+            "Com 'o' fechado, como em 'avô'",
+            "Com 'o' aberto, como em 'avó'",
+            "Sem alteração em relação ao singular",
+            "Como 'u'"
+          ],
+          "respostaCorreta": 1,
+          "feedbackPositivo": "Exato! No plural 'jogos', a vogal tónica 'o' é pronunciada aberta ('ó', como em 'avó'), enquanto no singular 'jogo' é fechada ('ô', como em 'avô').",
+          "feedbackNegativo": "Incorreto. No português europeu, a vogal tónica 'o' da palavra 'jogo' é fechada no singular, mas abre-se no plural 'jogos', resultando em 'ó' aberto."
+        },
+        {
+          "pergunta": "Qual fenómeno explica a diferença de pronúncia na vogal tónica entre 'forno' e 'fornos'?",
+          "opcoes": [
+            "Assimilação",
+            "Metafonia",
+            "Síncope",
+            "Epêntese"
+          ],
+          "respostaCorreta": 1,
+          "feedbackPositivo": "Correto! A metafonia explica por que o 'o' tónico em 'forno' é fechado, mas em 'fornos' torna-se aberto devido à influência da terminação '-os'.",
+          "feedbackNegativo": "Não está correto. A mudança no timbre da vogal tónica 'o' de fechada em 'forno' para aberta em 'fornos' é um caso típico de metafonia."
+        }
+      ]
+    }
+  ]
+};
+
+export default FoneticaPT;
